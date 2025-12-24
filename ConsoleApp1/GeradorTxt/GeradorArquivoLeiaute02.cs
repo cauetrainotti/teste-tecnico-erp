@@ -1,0 +1,26 @@
+﻿using GeradorTxt;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1.GeradorTxt
+{
+    internal class GeradorArquivoLeiaute02 : GeradorArquivoBase
+    {
+        protected override void EscreverTipo02(StringBuilder sb, ItemDocumento item)
+        {
+            sb.Append("02").Append("|")
+              .Append(item.NumeroItem).Append("|")
+              .Append(item.Descricao).Append("|")
+              .Append(ToMoney(item.Valor)).AppendLine();
+        }
+        protected override void EscreverCategoriaDoItem(StringBuilder sb, Categoria cat)
+        {
+            sb.Append("03").Append("|")
+              .Append(cat.NumeroCategoria).Append("|")
+              .Append(cat.DescricaoCategoria).AppendLine();
+        }
+    }
+}
