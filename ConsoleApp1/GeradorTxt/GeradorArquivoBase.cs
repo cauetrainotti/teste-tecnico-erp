@@ -16,12 +16,14 @@ namespace GeradorTxt
         public void Gerar(List<Empresa> empresas, string outputPath)
         {
             var sb = new StringBuilder();
+
             foreach (var emp in empresas)
             {
                 EscreverTipo00(sb, emp);
                 foreach (var doc in emp.Documentos)
                 {
                     EscreverTipo01(sb, doc);
+
                     foreach (var item in doc.Itens)
                     {
                         EscreverTipo02(sb, item);
@@ -55,12 +57,16 @@ namespace GeradorTxt
               .Append(ToMoney(doc.Valor)).AppendLine();
         }
 
-        protected void EscreverTipo02(StringBuilder sb, ItemDocumento item)
+        protected virtual void EscreverTipo02(StringBuilder sb, ItemDocumento item)
         {
             // 02|DESCRICAOITEM|VALORITEM
             sb.Append("02").Append("|")
               .Append(item.Descricao).Append("|")
               .Append(ToMoney(item.Valor)).AppendLine();
+        }
+
+        protected virtual void EscreverCategoriaDoItem(StringBuilder sb, ItemDocumento item)
+        {
         }
     }
 }
