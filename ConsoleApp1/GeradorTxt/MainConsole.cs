@@ -59,10 +59,21 @@ namespace GeradorTxt
                         break;
 
                     case "3":
-                        Console.Write("Gerar arquivo");
+                        Console.Write("Gerar Arquivo - Selecione seu leiaute (ex: 01): ");
+                        var leiauteInput = Console.ReadLine();
+
+                        if (!int.TryParse(leiauteInput, out int opcao) ||
+                            !Enum.IsDefined(typeof(LeiauteTipo), opcao))
+                        {
+                            Console.WriteLine("Leiaute inválido.");
+                            break;
+                        }
+
+                        var leiaute = (LeiauteTipo)opcao;
+
                         try
                         {
-                            var gerador = new GeradorArquivoBase();
+                            var gerador = GeradorArquivoFactory.Criar(leiaute);
 
                             var dados = JsonRepository.LoadEmpresas(_jsonPath);
 
