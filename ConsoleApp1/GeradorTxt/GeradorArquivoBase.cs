@@ -27,6 +27,10 @@ namespace GeradorTxt
                     foreach (var item in doc.Itens)
                     {
                         EscreverTipo02(sb, item);
+                        foreach (var cat in item.Categorias)
+                        {
+                            EscreverCategoriaDoItem(sb, item);
+                        }
                     }
                 }
             }
