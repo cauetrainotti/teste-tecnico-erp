@@ -29,7 +29,7 @@ namespace GeradorTxt
                         EscreverTipo02(sb, item);
                         foreach (var cat in item.Categorias)
                         {
-                                EscreverCategoriaDoItem(sb, cat);
+                                EscreverTipo03(sb, cat);
                         }
                     }
                 }
@@ -67,6 +67,11 @@ namespace GeradorTxt
             sb.Append("02").Append("|")
               .Append(item.Descricao).Append("|")
               .Append(ToMoney(item.Valor)).AppendLine();
+        }
+
+        protected virtual void EscreverTipo03(StringBuilder sb, Categoria cat)
+        {
+        }
         }
 
         protected virtual void EscreverCategoriaDoItem(StringBuilder sb, Categoria cat)
