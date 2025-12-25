@@ -22,6 +22,8 @@ namespace GeradorTxt
 
             foreach (var emp in empresas)
             {
+                ValidarValoresDosDocumentos(sb, emp);
+
                 EscreverTipo00(sb, emp);
                 foreach (var doc in emp.Documentos)
                 {
@@ -48,6 +50,20 @@ namespace GeradorTxt
         {
             // Força ponto como separador decimal, conforme muitos leiautes.
             return val.ToString("0.00", CultureInfo.InvariantCulture);
+        }
+
+        protected void ValidarValoresDosDocumentos(StringBuilder sb, Empresa emp)
+        {
+            foreach (var doc in emp.Documentos)
+            {
+                decimal somaItens = doc.Itens.Sum(i => i.Valor);
+                if (somaItens != doc.Valor)
+                {
+                    throw new InvalidOperationException(
+                        $"Documento {doc.Numero} da empresa {emp.Nome} possui valor {doc.Valor} " +
+                        $"diferente da soma dos itens {somaItens}.");
+                }
+            }
         }
 
         protected void EscreverTipo00(StringBuilder sb, Empresa emp)
