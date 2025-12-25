@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace GeradorTxt
@@ -13,6 +14,8 @@ namespace GeradorTxt
     /// </summary>
     public class GeradorArquivoBase
     {
+        protected Dictionary<string, int> ContadorLinhas = new Dictionary<string, int>();
+
         public void Gerar(List<Empresa> empresas, string outputPath)
         {
             var sb = new StringBuilder();
@@ -34,6 +37,10 @@ namespace GeradorTxt
                     }
                 }
             }
+
+            EscreverTipo09(sb);
+            EscreverTipo99(sb);
+
             File.WriteAllText(outputPath, sb.ToString(), Encoding.UTF8);
         }
 
@@ -50,6 +57,8 @@ namespace GeradorTxt
               .Append(emp.CNPJ).Append("|")
               .Append(emp.Nome).Append("|")
               .Append(emp.Telefone).AppendLine();
+
+            RegistrarLinha("00");
         }
 
         protected void EscreverTipo01(StringBuilder sb, Documento doc)
@@ -59,6 +68,8 @@ namespace GeradorTxt
               .Append(doc.Modelo).Append("|")
               .Append(doc.Numero).Append("|")
               .Append(ToMoney(doc.Valor)).AppendLine();
+
+            RegistrarLinha("01");
         }
 
         protected virtual void EscreverTipo02(StringBuilder sb, ItemDocumento item)
@@ -67,15 +78,37 @@ namespace GeradorTxt
             sb.Append("02").Append("|")
               .Append(item.Descricao).Append("|")
               .Append(ToMoney(item.Valor)).AppendLine();
+
+            RegistrarLinha("02");
         }
 
         protected virtual void EscreverTipo03(StringBuilder sb, Categoria cat)
         {
         }
+
+        protected virtual void EscreverTipo09(StringBuilder sb)
+        {
+            sb.Append("09");
+
+            foreach (var tipo in ContadorLinhas.Keys.OrderBy(t => t))
+            {
+                sb.Append("|").Append(ContadorLinhas[tipo]);
+            }
+
+            sb.AppendLine();
         }
 
-        protected virtual void EscreverCategoriaDoItem(StringBuilder sb, Categoria cat)
+        protected void RegistrarLinha(string tipo)
         {
+            if (!ContadorLinhas.ContainsKey(tipo))
+                ContadorLinhas[tipo] = 0;
+
+            ContadorLinhas[tipo]++;
+        }
+
+        protected virtual void EscreverTipo99(StringBuilder sb)
+        {
+            sb.AppendLine($"99|{ContadorLinhas.Values.Sum()}");
         }
     }
 }

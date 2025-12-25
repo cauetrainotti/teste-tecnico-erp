@@ -15,12 +15,16 @@ namespace ConsoleApp1.GeradorTxt
               .Append(item.NumeroItem).Append("|")
               .Append(item.Descricao).Append("|")
               .Append(ToMoney(item.Valor)).AppendLine();
+
+            RegistrarLinha("02");
         }
         protected override void EscreverTipo03(StringBuilder sb, Categoria cat)
         {
             sb.Append("03").Append("|")
               .Append(cat.NumeroCategoria).Append("|")
               .Append(cat.DescricaoCategoria).AppendLine();
+
+            RegistrarLinha("03");
         }
     }
 }
