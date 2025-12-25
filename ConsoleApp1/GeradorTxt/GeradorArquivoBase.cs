@@ -84,10 +84,13 @@ namespace GeradorTxt
 
         protected virtual void EscreverTipo03(StringBuilder sb, Categoria cat)
         {
+            // 03|NUMEROCATEGORIA|DESCRICAOCATEGORIA
+            // Não implementado no leiaute base
         }
 
         protected virtual void EscreverTipo09(StringBuilder sb)
         {
+            // 09|QTD_LINHA_TIPO_00|QTD_LINHA_TIPO_01|QTD_LINHA_TIPO_02|...
             sb.Append("09");
 
             foreach (var tipo in ContadorLinhas.Keys.OrderBy(t => t))
@@ -108,6 +111,7 @@ namespace GeradorTxt
 
         protected virtual void EscreverTipo99(StringBuilder sb)
         {
+            // 99|QTD_LINHAS_TOTAL
             sb.AppendLine($"99|{ContadorLinhas.Values.Sum()}");
         }
     }
