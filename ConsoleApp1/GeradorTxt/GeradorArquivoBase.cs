@@ -22,7 +22,7 @@ namespace GeradorTxt
 
             foreach (var emp in empresas)
             {
-                ValidarValoresDosDocumentos(sb, emp);
+                ValidarValoresDosDocumentos(emp);
 
                 EscreverTipo00(sb, emp);
                 foreach (var doc in emp.Documentos)
@@ -52,7 +52,7 @@ namespace GeradorTxt
             return val.ToString("0.00", CultureInfo.InvariantCulture);
         }
 
-        protected void ValidarValoresDosDocumentos(StringBuilder sb, Empresa emp)
+        protected void ValidarValoresDosDocumentos(Empresa emp)
         {
             foreach (var doc in emp.Documentos)
             {
