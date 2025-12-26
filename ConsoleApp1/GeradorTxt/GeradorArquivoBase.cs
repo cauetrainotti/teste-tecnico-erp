@@ -22,19 +22,28 @@ namespace GeradorTxt
 
             foreach (var emp in empresas)
             {
-                ValidarValoresDosDocumentos(emp);
+                if (emp == null) continue;
 
+                ValidarValoresDosDocumentos(emp);
                 EscreverTipo00(sb, emp);
+
                 foreach (var doc in emp.Documentos)
                 {
+                    if (doc == null) continue;
+
                     EscreverTipo01(sb, doc);
 
                     foreach (var item in doc.Itens)
                     {
+                        if (item == null) continue;
+
                         EscreverTipo02(sb, item);
+
                         foreach (var cat in item.Categorias)
                         {
-                                EscreverTipo03(sb, cat);
+                            if (cat == null) continue;
+
+                            EscreverTipo03(sb, cat);
                         }
                     }
                 }
@@ -54,6 +63,8 @@ namespace GeradorTxt
 
         protected void ValidarValoresDosDocumentos(Empresa emp)
         {
+            if (emp == null) throw new ArgumentNullException(nameof(emp));
+
             foreach (var doc in emp.Documentos)
             {
                 decimal somaItens = doc.Itens.Sum(i => i.Valor);
@@ -119,6 +130,8 @@ namespace GeradorTxt
 
         protected void RegistrarLinha(string tipo)
         {
+            if (string.IsNullOrEmpty(tipo)) return;
+
             if (!ContadorLinhas.ContainsKey(tipo))
                 ContadorLinhas[tipo] = 0;
 
