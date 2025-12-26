@@ -1,5 +1,7 @@
 # GeradorTxt – Teste Técnico Programador (Produto ERP)
 
+---
+
 ## Descrição
 Aplicação console responsável por gerar arquivos texto (.txt) a partir de um arquivo JSON contendo dados de empresas, documentos, itens e categorias.
 
