@@ -44,9 +44,21 @@ namespace GeradorTxt.Tests
             };
 
             var path = Path.GetTempFileName();
-            gerador.Gerar(empresas, path);
 
-            return File.ReadAllText(path);
+            try
+            {
+                gerador.Gerar(empresas, path);
+
+                var content = File.ReadAllText(path);
+                return content;
+            }
+            finally
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+            }
         }
     }
 }
