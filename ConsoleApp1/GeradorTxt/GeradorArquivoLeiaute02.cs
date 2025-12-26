@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.GeradorTxt
 {
-    internal class GeradorArquivoLeiaute02 : GeradorArquivoBase
+    public class GeradorArquivoLeiaute02 : GeradorArquivoBase
     {
         protected override void EscreverTipo02(StringBuilder sb, ItemDocumento item)
         {
