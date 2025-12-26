@@ -6,7 +6,7 @@ namespace GeradorTxt
     {
         protected override void EscreverTipo02(StringBuilder sb, ItemDocumento item)
         {
-            // 01|MODELODOCUMENTO|NUMERODOCUMENTO|VALORDOCUMENTO
+            // 02|NUMEROITEM|DESCRICAOITEM|VALORITEM
             sb.Append("02").Append("|")
               .Append(item.NumeroItem).Append("|")
               .Append(item.Descricao).Append("|")
