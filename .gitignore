@@ -54,3 +54,4 @@ TestResult.xml
 nunit-*.xml
 /ConsoleApp1/.vs
 /.vs
+/packages
