@@ -12,7 +12,7 @@ namespace GeradorTxt
     /// IMPORTANTE: métodos NÃO marcados como virtual de propósito.
     /// O candidato deve decidir onde permitir override para suportar versões futuras.
     /// </summary>
-    public class GeradorArquivoBase
+    public abstract class GeradorArquivoBase
     {
         protected Dictionary<string, int> ContadorLinhas = new Dictionary<string, int>();
 
